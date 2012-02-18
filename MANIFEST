@@ -48,3 +48,5 @@ tee/tee.xs
 filter-util.pl
 perlfilter.pod
 META.yml                                 Module meta-data (added by MakeMaker)
+META.json                                Module JSON meta-data (added by MakeMaker)
+SIGNATURE                                Public-key signature (added by MakeMaker)
