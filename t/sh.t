@@ -32,8 +32,7 @@ use vars qw( $Inc $Perl $script ) ;
 
 $script = <<'EOF' ;
 
-use Filter::sh q(tr '[A-E][I-M]' '[a-e][i-m]') ;
-use Filter::sh q(tr '[N-Z]' '[n-z]') ;
+use Filter::sh q(tr '[:upper:]' '[:lower:]') ;
 
 EOF
 
@@ -57,12 +56,12 @@ writeFile($filename, $script) ;
 
 my $expected_output = <<'EOM' ;
 a = 2
-Hello joe
-mary Had 
+hello joe
+mary had 
 a
 little
 lamb
-a (aGain) = 2
+a (again) = 2
 EOM
 
 my $a = `$Perl $Inc $filename 2>&1` ;

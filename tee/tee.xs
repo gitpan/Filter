@@ -16,11 +16,7 @@ static I32
 filter_tee(pTHX_ int idx, SV *buf_sv, int maxlen)
 {
     I32 len;
-#if PERL_VERSION > 8 || (PERL_VERSION == 8 && PERL_SUBVERSION > 8)
-    PerlIO * fil = (PerlIO*) IoOFP(FILTER_DATA(idx));
-#else
-    PerlIO * fil = (PerlIO*) SvIV(FILTER_DATA(idx));
-#endif
+    PerlIO * fil = (PerlIO*) SvIV(FILTER_DATA(idx)) ;
     int old_len = SvCUR(buf_sv) ;
  
     if ( (len = FILTER_READ(idx+1, buf_sv, maxlen)) <=0 ) {
@@ -45,13 +41,9 @@ import(module, filename)
     SV *	module = NO_INIT
     char *	filename
     CODE:
-#if PERL_VERSION > 8 || (PERL_VERSION == 8 && PERL_SUBVERSION > 8)
-	SV   * stream = newSV_type(SVt_PVIO);
-#else
-        SV   * stream = newSViv(0);
-#endif
+	SV   * stream = newSViv(0) ;
 	PerlIO * fil ;
-	char * mode = "wb" ;
+	const char * mode = "wb" ;
 
 	filter_add(filter_tee, stream);
 	/* check for append */
@@ -66,10 +58,6 @@ import(module, filename)
 	    croak("Filter::tee - cannot open file '%s': %s", 
 			filename, Strerror(errno)) ;
 
-	/* save the tee'd file handle. */
-#if PERL_VERSION > 8 || (PERL_VERSION == 8 && PERL_SUBVERSION > 8)
-        IoOFP(stream) = (PerlIO*) fil;
-#else
-	SvIV_set(stream, (PerlIO*) fil);
-#endif
+	/* save the tee'd file handle */
+	SvIV_set(stream, (IV)fil) ;
 

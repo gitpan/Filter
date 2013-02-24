@@ -50,7 +50,7 @@ else
 
 WriteMakefile(
 	NAME      => 'Filter',
-	VERSION   => '1.45',
+	VERSION   => '1.40',
 	'linkext'   => {LINKTYPE => ''},
 	'dist'	  =>	{COMPRESS=>'gzip', SUFFIX=>'gz',
 			DIST_DEFAULT => 'tardist'},
@@ -63,7 +63,7 @@ WriteMakefile(
     INSTALLDIRS => ($] >= 5.00703 ? 'perl' : 'site'),
 
     ((ExtUtils::MakeMaker->VERSION() gt '6.30') ?
-        ('LICENSE'  => 'perl', SIGN => 1)  : ()),
+        ('LICENSE'  => 'perl')         : ()),
 	) ;
 
 sub MY::libscan

@@ -7,7 +7,7 @@ use Carp ;
 use strict ;
 use warnings ;
 
-our $VERSION = '1.01' ;
+my $VERSION = '1.01' ;
 
 sub filter 
 { 

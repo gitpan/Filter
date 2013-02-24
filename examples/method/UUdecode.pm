@@ -6,7 +6,7 @@ use Filter::Util::Call ;
 use strict ;
 use warnings ;
 
-our $VERSION = '1.00' ;
+my $VERSION = '1.00' ;
 
 sub import
 {

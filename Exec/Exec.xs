@@ -219,8 +219,8 @@ pipe_read(SV *sv, int idx, int maxlen)
     int len ;
 
     if (fdebug)
-        warn ("*pipe_read(sv=%d, SvCUR(sv)=%d, idx=%d, maxlen=%d\n",
-		sv, SvCUR(sv), idx, maxlen) ;
+        warn ("*pipe_read(sv=%p, SvCUR(sv)=%lu, idx=%d, maxlen=%d\n",
+		sv, (unsigned long)SvCUR(sv), idx, maxlen) ;
 
     if (!maxlen)
 	maxlen = 1024 ;
@@ -274,8 +274,8 @@ pipe_read(SV *sv, int idx, int maxlen)
             if ((len = FILTER_READ(idx+1, (SV*) BUF_SV(sv), 0)) > 0) {
 		BUF_NEXT(sv) = BUF_START(sv);
                 if (fdebug)
-                    warn ("*pipe_write(%d) Filt Rd returned %d %d [%*s]\n", 
-			idx, len, BUF_SIZE(sv), BUF_SIZE(sv), BUF_START(sv)) ;
+                    warn ("*pipe_write(%d) Filt Rd returned %d %lu [%*s]\n", 
+			idx, len, (unsigned long)BUF_SIZE(sv), (int)BUF_SIZE(sv), BUF_START(sv)) ;
 	     }
              else {
                 /* eof, close write end of pipe */
@@ -488,11 +488,11 @@ filter_exec(pTHX_ int idx, SV *buf_sv, int maxlen)
     char * out_ptr = SvPVX(buffer) ;
     int	n ;
     char *	p ;
-    char *	nl = "\n" ;
+    const char * nl = "\n" ;
  
     if (fdebug)
-        warn ("filter_sh(idx=%d, SvCUR(buf_sv)=%d, maxlen=%d\n", 
-		idx, SvCUR(buf_sv), maxlen) ;
+        warn ("filter_sh(idx=%d, SvCUR(buf_sv)=%lu, maxlen=%d\n", 
+		idx, (unsigned long)SvCUR(buf_sv), maxlen) ;
     while (1) {
 	STRLEN n_a;
 
@@ -526,10 +526,10 @@ filter_exec(pTHX_ int idx, SV *buf_sv, int maxlen)
 		    BUF_OFFSET(buffer) += (p - out_ptr + 1);
                     SvCUR_set(buffer, n) ;
                     if (fdebug)
-                        warn("recycle(%d) - leaving %d [%s], returning %d %d [%s]", 
+                        warn("recycle(%d) - leaving %d [%s], returning %d %lu [%s]", 
 				idx, n, 
 				SvPVX(buffer), p - out_ptr + 1, 
-				SvCUR(buf_sv), SvPVX(buf_sv)) ;
+				(unsigned long)SvCUR(buf_sv), SvPVX(buf_sv)) ;
      
                     return SvCUR(buf_sv);
                 }
@@ -548,8 +548,8 @@ filter_exec(pTHX_ int idx, SV *buf_sv, int maxlen)
         if ( (n=pipe_read(buffer, idx, maxlen)) <= 0) {
  
             if (fdebug)
-                warn ("filter_sh(%d) - pipe_read returned %d , returning %d\n", 
-			idx, n, (SvCUR(buf_sv)>0) ? SvCUR(buf_sv) : n);
+                warn ("filter_sh(%d) - pipe_read returned %d , returning %lu\n", 
+			idx, n, (unsigned long)((SvCUR(buf_sv)>0) ? SvCUR(buf_sv) : n));
  
             SvCUR_set(buffer, 0);
 	    BUF_NEXT(buffer) = Nullch;	/* or perl will try to free() it */
@@ -564,8 +564,8 @@ filter_exec(pTHX_ int idx, SV *buf_sv, int maxlen)
         }
  
         if (fdebug)
-            warn("  filter_sh(%d): pipe_read returned %d %d: '%s'",
-                idx, n, SvCUR(buffer), SvPV(buffer,n_a));
+            warn("  filter_sh(%d): pipe_read returned %d %lu: '%s'",
+                idx, n, (unsigned long)SvCUR(buffer), SvPV(buffer,n_a));
  
     }
 

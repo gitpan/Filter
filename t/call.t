@@ -1,13 +1,19 @@
 BEGIN {
     if ($ENV{PERL_CORE}){
+        chdir('t') if -d 't';
+        @INC = ('.', '../lib');
+    
         require Config; import Config;
         %Config=%Config if 0; # cease -w
         if ($Config{'extensions'} !~ m{\bFilter/Util/Call\b}) {
             print "1..0 # Skip: Filter::Util::Call was not built\n";
             exit 0;
         }
+        require 'lib/filter-util.pl';
     }
-    require 'filter-util.pl';
+    else {
+        require 'filter-util.pl';
+    }
 }
 
 use strict;
@@ -786,7 +792,7 @@ EOM
 {
 
 # no without use
-# see Message-ID: <2002110621.427.A15377@ttul.org>
+# see Message-ID: <20021106212427.A15377@ttul.org>
 ####################
 
 writeFile("${module6}.pm", <<EOM);

@@ -326,39 +326,13 @@
   * Fix decrypt to work with Perl 5.14
     [RT #67656]
 
-1.40 9 Feb 2012 rurban
+1.40 24 February 2013
 ----
 
-  * Fix tee and all tests to work with Perl 5.14 and higher.
-    PVIO has no IV field anymore, so abuse the empty IoOFP,
-    which is only used for printing, not reading.
-    Fixes [RT #56875] and more.
-    Tested for 5.6.2, 5.8.4, 5.8.5, 5.8.8, 5.8.9, 5.10.1, 5.12.4,
-    5.14.2, 5.15.7
+  * Silence a few compiler warnings
 
-1.41 18 Feb 2012 rurban
-----
+  * sh.t failed on non-english locales
+    [RT #41285]
 
-  * Hide example packages from the pause indexer
-
-1.42 20 Feb 2012 rurban
-----
-
-  * Improve t/tee.t test 5 on windows which allows all Administrator
-    members read-access [RT #75164]
-
-1.43 21 Feb 2012 rurban
-----
-
-  * Fix more windows tests:
-    http://www.cpantesters.org/cpan/report/9e790a72-6bf5-1014-9f3b-641f296be760
-
-1.44 2012-06-18 rurban
-----
-
-  * Sync t/call.t with core fixes in 2adbc9b6
-
-1.45 2012-06-19 rurban
-----
-
-  * Sync perlfilter.pod with core improvements
+  * aded yml & json files to MANIFEST
+    [RT #82687]
