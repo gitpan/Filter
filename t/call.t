@@ -1,19 +1,13 @@
 BEGIN {
     if ($ENV{PERL_CORE}){
-        chdir('t') if -d 't';
-        @INC = ('.', '../lib');
-    
         require Config; import Config;
         %Config=%Config if 0; # cease -w
         if ($Config{'extensions'} !~ m{\bFilter/Util/Call\b}) {
             print "1..0 # Skip: Filter::Util::Call was not built\n";
             exit 0;
         }
-        require 'lib/filter-util.pl';
     }
-    else {
-        require 'filter-util.pl';
-    }
+    require 'filter-util.pl';
 }
 
 use strict;
@@ -60,7 +54,7 @@ EOM
  
 my $a = `$Perl "-I." $Inc -e "use ${module} ;"  $redir` ;
 ok(1, (($? >>8) != 0 or (($^O eq 'MSWin32' || $^O eq 'MacOS' || $^O eq 'NetWare' || $^O eq 'mpeix') && $? != 0))) ;
-ok(2, $a =~ /^Can't locate object method "filter" via package "MyTest"/) ;
+ok(2, $a =~ /^Can't locate object method "filter" via package "MyTest"/m) ;
  
 # no reference parameter in filter_add
 ######################################
@@ -78,7 +72,7 @@ EOM
 $a = `$Perl "-I." $Inc -e "use ${module} ;"  $redir` ;
 ok(3, (($? >>8) != 0 or (($^O eq 'MSWin32' || $^O eq 'MacOS' || $^O eq 'NetWare' || $^O eq 'mpeix') && $? != 0))) ;
 #ok(4, $a =~ /^usage: filter_add\(ref\) at ${module}.pm/) ;
-ok(4, $a =~ /^Not enough arguments for Filter::Util::Call::filter_add/) ;
+ok(4, $a =~ /^Not enough arguments for Filter::Util::Call::filter_add/m) ;
  
 
 
@@ -792,7 +786,7 @@ EOM
 {
 
 # no without use
-# see Message-ID: <20021106212427.A15377@ttul.org>
+# see Message-ID: <2002110621.427.A15377@ttul.org>
 ####################
 
 writeFile("${module6}.pm", <<EOM);

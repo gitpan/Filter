@@ -137,7 +137,7 @@ static I32
 filter_decrypt(pTHX_ int idx, SV *buf_sv, int maxlen)
 {
     SV   *my_sv = FILTER_DATA(idx);
-    const char *nl = "\n";
+    char *nl = "\n";
     char *p;
     char *out_ptr;
     int n;

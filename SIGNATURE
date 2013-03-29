@@ -1,0 +1,74 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.70.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+SHA1 651e783dba34c7d00829fa3848bef0b1a6d874cc Call/Call.pm
+SHA1 ae4152bc4d98fa45c77cc74d73eea567622be8d3 Call/Call.xs
+SHA1 3d1e6a5e07761b79dae2a67df5e7484ab8517e02 Call/Makefile.PL
+SHA1 ab106878b5b6770b97a1a6bfc6ae327930aca030 Call/ppport.h
+SHA1 bb5316cb0f0ae4449f3973242908bf656b446aea Call/typemap
+SHA1 4145f1024b6cd76ed08aa8473a8321556d283668 Changes
+SHA1 94e8a41e107fa8b98d13f01557be45c74ec18c51 Exec/Exec.pm
+SHA1 50b57a40619cf8bf0985e18487d0dc481ff1ba24 Exec/Exec.xs
+SHA1 f5c86e77cfcb10451775fc0d2c1448ba1b7ee7f7 Exec/Makefile.PL
+SHA1 91666c490db04c8a4dfa7185c12e9813125fd7f1 MANIFEST
+SHA1 b1bc73735eabd20051c6f54329c3c038c7e7ceec META.json
+SHA1 17f867ea58251a199e92a4d9a7f4d9b176bb5fa7 META.yml
+SHA1 d0081fbb009df8fcb19febb5ebf05ac3c845d4ba Makefile.PL
+SHA1 d68d02ca07bf4c7bf85ae15ebb4a963593f355c4 README
+SHA1 d298989d6a6dde3eae4563d91c7c7cd3c511e050 decrypt/Makefile.PL
+SHA1 ed95e519c49033476f6b1084b7a6fd6347ce7737 decrypt/decr
+SHA1 6ce13a09e6c28a5916660a506fb8899ba7ebd57f decrypt/decrypt.pm
+SHA1 585f551eaedc1d20f5579ae2133edd6f84032a57 decrypt/decrypt.xs
+SHA1 0f22731e97b9b3803ffe785d9e2c5665cfd654c6 decrypt/encrypt
+SHA1 0bf507061d318b097119837bbda8411f06c2bfb5 examples/closure/Count.pm
+SHA1 b8965a11e0a20642dfe99421961a112edf2a8706 examples/closure/Decompress.pm
+SHA1 b571192030a49517999c4d640c65c679ffabe987 examples/closure/Include.pm
+SHA1 58648f39b04f74496015a680fd5d3d99b074a359 examples/closure/Joe2Jim.pm
+SHA1 4fe4ce8beaf7f5849113ace1677870e07f877443 examples/closure/NewSubst.pm
+SHA1 b4f98a32c6205675a7e041e0c837503b583e4c9d examples/closure/Subst.pm
+SHA1 a6273396754c279634b5aac7ef1f604429d6e8d1 examples/closure/UUdecode.pm
+SHA1 00367d39bca7afeab32cb0b5a0f39ab7b7a61b29 examples/filtdef
+SHA1 429a322f7343d14d66d0bae4e489617a299433ce examples/filtuu
+SHA1 f292b8b9cfb316ada1dce3d94f189c20710c9d11 examples/method/Count.pm
+SHA1 6cf89f5cc21c4aa02a6ea905292f0d4fe82f28d6 examples/method/Decompress.pm
+SHA1 fc6a95368aee62a2992521dd518087e6132c01cf examples/method/Joe2Jim.pm
+SHA1 2d4b9dd848b9eeb0de0ee7667f8ba105f1545125 examples/method/NewSubst.pm
+SHA1 a9cdfae6778ebaccf11e9e73cc9bd5d4db48df7d examples/method/Subst.pm
+SHA1 4c1705bf10a64379adc1c07517f0da93b795c438 examples/method/UUdecode.pm
+SHA1 1ade6b0e64d3c16c23acd0126c73d6c7e2fdc4a5 filter-util.pl
+SHA1 2e6db8564c4fc18399d98c05609afcfe2e030653 lib/Filter/cpp.pm
+SHA1 2a98ca8e4df7d3bff94637dc870e47c95c030913 lib/Filter/exec.pm
+SHA1 a8731459699c802f358b30a9dc96eef70f904e86 lib/Filter/sh.pm
+SHA1 cef9663cf8f6d83ee79b390d14d7a6e4683fb457 mytest
+SHA1 698323e82a48c4ce1064d81de12d09dfd31d3559 perlfilter.pod
+SHA1 af34efde040dd58d8d5c569c91907e25749486db t/call.t
+SHA1 3644d155108e9e14f7230476454f8a3853cceab6 t/cpp.t
+SHA1 729e782821556324f3c27867e70f9de59532c8a6 t/decrypt.t
+SHA1 f8c1c637dd363e6af61ab71f22b381693d3cb81b t/exec.t
+SHA1 6a38220b0f2621d3480dc42836df20cc9e456c4f t/order.t
+SHA1 e7a909de43952a83b985134e312e65a108c9c8e3 t/pod.t
+SHA1 10b751d9fd76de39da815c92c8f98868cf241564 t/sh.t
+SHA1 61f8b873d7855f8cef88ff1735cd8b5fe0b04022 t/tee.t
+SHA1 8568bca5a96669cb8d8a37eec0453ead6f331b3e tee/Makefile.PL
+SHA1 2d6b5f377b68c60d6302c9584f2e53394f403eb6 tee/tee.pm
+SHA1 86da5dd869daf1b40405e827eae0241a07e0ce56 tee/tee.xs
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEARECAAYFAlFVx24ACgkQmm2SYo/9yUIukQCfSwIbKbczwXNhI2S4d5w8dZdZ
+yUYAn325Rj9RmeeRhMkQnJB5D+MBNk4k
+=5bm6
+-----END PGP SIGNATURE-----

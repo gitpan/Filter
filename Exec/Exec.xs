@@ -2,8 +2,8 @@
  * Filename : exec.xs
  * 
  * Author   : Paul Marquess 
- * Date     : 26th March 2000
- * Version  : 1.05
+ * Date     : 2013-03-29 11:46:06 rurban
+ * Version  : 1.46
  *
  */
 
@@ -219,8 +219,8 @@ pipe_read(SV *sv, int idx, int maxlen)
     int len ;
 
     if (fdebug)
-        warn ("*pipe_read(sv=%p, SvCUR(sv)=%lu, idx=%d, maxlen=%d\n",
-		sv, (unsigned long)SvCUR(sv), idx, maxlen) ;
+        warn ("*pipe_read(sv=%p, SvCUR(sv)=%" IVdf ", idx=%d, maxlen=%d\n",
+		sv, SvCUR(sv), idx, maxlen) ;
 
     if (!maxlen)
 	maxlen = 1024 ;
@@ -255,11 +255,15 @@ pipe_read(SV *sv, int idx, int maxlen)
 		/* close the read pipe on error/eof */
     		if (fdebug)
 		    warn("*pipe_read(%d) -- EOF <#########\n", idx) ;
-		close (pipe_in) ; 
+		close (pipe_in) ;
+#if PERL_VERSION < 17 || (PERL_VERSION == 17 && PERL_SUBVERSION < 6)
 #ifdef HAVE_WAITPID
                 waitpid(pipe_pid, NULL, 0) ;
 #else
 		wait(NULL);
+#endif
+#else
+		sleep(0);
 #endif
                 return 0;
 	    }
@@ -274,8 +278,8 @@ pipe_read(SV *sv, int idx, int maxlen)
             if ((len = FILTER_READ(idx+1, (SV*) BUF_SV(sv), 0)) > 0) {
 		BUF_NEXT(sv) = BUF_START(sv);
                 if (fdebug)
-                    warn ("*pipe_write(%d) Filt Rd returned %d %lu [%*s]\n", 
-			idx, len, (unsigned long)BUF_SIZE(sv), (int)BUF_SIZE(sv), BUF_START(sv)) ;
+                    warn ("*pipe_write(%d) Filt Rd returned %d %" IVdf " [%*s]\n",
+			  idx, len, BUF_SIZE(sv), BUF_SIZE(sv), BUF_START(sv)) ;
 	     }
              else {
                 /* eof, close write end of pipe */
@@ -296,9 +300,9 @@ pipe_read(SV *sv, int idx, int maxlen)
                  if (fdebug)
                     warn ("*pipe_read(%d) wrote %d bytes to pipe\n", idx, w) ;
 	     }
-            else if (errno != VAL_EAGAIN) {
+	     else if (errno != VAL_EAGAIN) {
                  if (fdebug)
-                    warn ("*pipe_read(%d) closing pipe_out errno = %d %s\n", 
+                    warn ("*pipe_read(%d) closing pipe_out errno = %d %s\n",
 				idx, errno, Strerror(errno)) ;
                  /* close(pipe_out) ; */
                  return 0;
@@ -488,18 +492,18 @@ filter_exec(pTHX_ int idx, SV *buf_sv, int maxlen)
     char * out_ptr = SvPVX(buffer) ;
     int	n ;
     char *	p ;
-    const char * nl = "\n" ;
+    char *	nl = "\n" ;
  
     if (fdebug)
-        warn ("filter_sh(idx=%d, SvCUR(buf_sv)=%lu, maxlen=%d\n", 
-		idx, (unsigned long)SvCUR(buf_sv), maxlen) ;
+        warn ("filter_sh(idx=%d, SvCUR(buf_sv)=%" IVdf ", maxlen=%d\n",
+		idx, SvCUR(buf_sv), maxlen) ;
     while (1) {
 	STRLEN n_a;
 
         /* If there was a partial line/block left from last time
            copy it now
         */
-        if (n = SvCUR(buffer)) {
+        if ((n = SvCUR(buffer))) {
 	    out_ptr  = SvPVX(buffer) + BUF_OFFSET(buffer) ;
 	    if (maxlen) { 
 		/* want a block */
@@ -520,16 +524,16 @@ filter_exec(pTHX_ int idx, SV *buf_sv, int maxlen)
 		/* want a line */
     		if (fdebug)
 		    warn("filter_sh(%d) - wants a line\n", idx) ;
-                if (p = ninstr(out_ptr, out_ptr + n, nl, nl + 1)) {
+                if ((p = ninstr(out_ptr, out_ptr + n, nl, nl + 1))) {
                     sv_catpvn(buf_sv, out_ptr, p - out_ptr + 1);
                     n = n - (p - out_ptr + 1);
 		    BUF_OFFSET(buffer) += (p - out_ptr + 1);
                     SvCUR_set(buffer, n) ;
                     if (fdebug)
-                        warn("recycle(%d) - leaving %d [%s], returning %d %lu [%s]", 
+                        warn("recycle(%d) - leaving %d [%s], returning %" IVdf " %" IVdf " [%s]",
 				idx, n, 
 				SvPVX(buffer), p - out_ptr + 1, 
-				(unsigned long)SvCUR(buf_sv), SvPVX(buf_sv)) ;
+				SvCUR(buf_sv), SvPVX(buf_sv)) ;
      
                     return SvCUR(buf_sv);
                 }
@@ -548,8 +552,8 @@ filter_exec(pTHX_ int idx, SV *buf_sv, int maxlen)
         if ( (n=pipe_read(buffer, idx, maxlen)) <= 0) {
  
             if (fdebug)
-                warn ("filter_sh(%d) - pipe_read returned %d , returning %lu\n", 
-			idx, n, (unsigned long)((SvCUR(buf_sv)>0) ? SvCUR(buf_sv) : n));
+                warn ("filter_sh(%d) - pipe_read returned %d , returning %" IVdf "\n",
+		      idx, n, (SvCUR(buf_sv)>0) ? SvCUR(buf_sv) : (STRLEN)n);
  
             SvCUR_set(buffer, 0);
 	    BUF_NEXT(buffer) = Nullch;	/* or perl will try to free() it */
@@ -564,8 +568,8 @@ filter_exec(pTHX_ int idx, SV *buf_sv, int maxlen)
         }
  
         if (fdebug)
-            warn("  filter_sh(%d): pipe_read returned %d %lu: '%s'",
-                idx, n, (unsigned long)SvCUR(buffer), SvPV(buffer,n_a));
+            warn("  filter_sh(%d): pipe_read returned %d %" IVdf ": '%s'",
+                idx, n, SvCUR(buffer), SvPV(buffer,n_a));
  
     }
 
@@ -580,7 +584,11 @@ PROTOTYPES:	ENABLE
 BOOT:
   {
     MY_CXT_INIT;
+#ifdef FDEBUG
+    fdebug = 1;
+#else
     fdebug = 0;
+#endif
     /* temporary hack to control debugging in toke.c */
     filter_add(NULL, (fdebug) ? (SV*)"1" : (SV*)"0"); 
   }

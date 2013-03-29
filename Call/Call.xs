@@ -2,8 +2,8 @@
  * Filename : Call.xs
  * 
  * Author   : Paul Marquess 
- * Date     : 24th April 2011
- * Version  : 1.39
+ * Date     : 2013-03-29 09:04:42 rurban
+ * Version  : 1.46
  *
  *    Copyright (c) 1995-2011 Paul Marquess. All rights reserved.
  *       This program is free software; you can redistribute it and/or
@@ -59,8 +59,8 @@ filter_call(pTHX_ int idx, SV *buf_sv, int maxlen)
     int n;
 
     if (fdebug)
-	warn("**** In filter_call - maxlen = %d, out len buf = %lu idx = %d my_sv = %lu [%s]\n", 
-		maxlen, (unsigned long)SvCUR(buf_sv), idx, (unsigned long)SvCUR(my_sv), SvPVX(my_sv) ) ;
+	warn("**** In filter_call - maxlen = %d, out len buf = %" IVdf " idx = %d my_sv = %" IVdf " [%s]\n",
+		maxlen, SvCUR(buf_sv), idx, SvCUR(my_sv), SvPVX(my_sv) ) ;
 
     while (1) {
 
@@ -96,8 +96,8 @@ filter_call(pTHX_ int idx, SV *buf_sv, int maxlen)
 		    BUF_OFFSET(my_sv) += (p - out_ptr + 1);
 	            SvCUR_set(my_sv, n) ;
 	            if (fdebug)
-		        warn("recycle %d - leaving %d, returning %lu [%s]", 
-				idx, n, (unsigned long)SvCUR(buf_sv), SvPVX(buf_sv)) ;
+		        warn("recycle %d - leaving %d, returning %" IVdf " [%s]",
+				idx, n, SvCUR(buf_sv), SvPVX(buf_sv)) ;
 
 	            return SvCUR(buf_sv);
 	        }
@@ -152,8 +152,8 @@ filter_call(pTHX_ int idx, SV *buf_sv, int maxlen)
 	    n = POPi ;
 
 	    if (fdebug)
-	        warn("status = %d, length op buf = %lu [%s]\n",
-		     n, (unsigned long)SvCUR(DEFSV), SvPVX(DEFSV) ) ;
+	        warn("status = %d, length op buf = %" IVdf " [%s]\n",
+		     n, SvCUR(DEFSV), SvPVX(DEFSV) ) ;
 	    if (SvCUR(DEFSV))
 	        sv_setpvn(my_sv, SvPVX(DEFSV), SvCUR(DEFSV)) ; 
 
@@ -171,8 +171,8 @@ filter_call(pTHX_ int idx, SV *buf_sv, int maxlen)
 	    /* Either EOF or an error */
 
 	    if (fdebug) 
-	        warn ("filter_read %d returned %d , returning %lu\n", idx, n,
-	            (unsigned long)((SvCUR(buf_sv)>0) ? SvCUR(buf_sv) : n));
+	        warn ("filter_read %d returned %d , returning %" IVdf "\n", idx, n,
+		      (SvCUR(buf_sv)>0) ? SvCUR(buf_sv) : (STRLEN)n);
 
 	    /* PERL_MODULE(my_sv) ; */
 	    /* PERL_OBJECT(my_sv) ; */
@@ -255,10 +255,13 @@ unimport(package="$Package", ...)
 BOOT:
   {
     MY_CXT_INIT;
+#ifdef FDEBUG
+    fdebug = 1;
+#else
     fdebug = 0;
+#endif
     /* temporary hack to control debugging in toke.c */
     if (fdebug)
         filter_add(NULL, (fdebug) ? (SV*)"1" : (SV*)"0");  
   }
-
 

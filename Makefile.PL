@@ -42,17 +42,16 @@ my @files = qw( filter-util.pl
              t/tee.t         
            );
              
-if ($] < 5.006001)
- { oldWarnings(@files) }
-else
- { newWarnings(@files) }     
-             
+if ($] < 5.006001) { oldWarnings(@files) }
+# keep the src in the new-warnings style
+#else { newWarnings(@files) }
 
 WriteMakefile(
-	NAME      => 'Filter',
-	VERSION   => '1.40',
+	DISTNAME  => 'Filter',
+	NAME      => 'Filter::Util::Call',
+	VERSION_FROM => 'Call/Call.pm',
 	'linkext'   => {LINKTYPE => ''},
-	'dist'	  =>	{COMPRESS=>'gzip', SUFFIX=>'gz',
+	'dist'	  =>   {COMPRESS=>'gzip', SUFFIX=>'gz',
 			DIST_DEFAULT => 'tardist'},
 	($] >= 5.005
 	    ? (ABSTRACT	=> 'Source Filters',
@@ -63,7 +62,7 @@ WriteMakefile(
     INSTALLDIRS => ($] >= 5.00703 ? 'perl' : 'site'),
 
     ((ExtUtils::MakeMaker->VERSION() gt '6.30') ?
-        ('LICENSE'  => 'perl')         : ()),
+        ('LICENSE'  => 'perl', SIGN => 1)  : ()),
 	) ;
 
 sub MY::libscan

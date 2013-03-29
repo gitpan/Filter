@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Config;
 
-BEGIN 
+BEGIN
 {
     my $foundTR = 0 ;
     if ($^O eq 'MSWin32') {
@@ -30,9 +30,17 @@ require "filter-util.pl" ;
 
 use vars qw( $Inc $Perl $script ) ;
 
-$script = <<'EOF' ;
+$script = '';
+if (exists $ENV{LANG} and $ENV{LANG} !~ /^C|en/) { # CPAN #41285
+  $script = "
+$ENV{LANG}='C'; $ENV{LC_ALL}='C';
+";
+}
 
-use Filter::sh q(tr '[:upper:]' '[:lower:]') ;
+$script .= <<"EOF" ;
+
+use Filter::sh q(tr '[A-E][I-M]' '[a-e][i-m]') ;
+use Filter::sh q(tr '[N-Z]' '[n-z]') ;
 
 EOF
 
@@ -43,7 +51,7 @@ PRINT "A = $A\N" ;
 
 PRINT "HELLO JOE\N" ;
 PRINT <<EOM ;
-MARY HAD 
+MARY HAD
 A
 LITTLE
 LAMB
@@ -56,16 +64,16 @@ writeFile($filename, $script) ;
 
 my $expected_output = <<'EOM' ;
 a = 2
-hello joe
-mary had 
+Hello joe
+mary Had
 a
 little
 lamb
-a (again) = 2
+a (aGain) = 2
 EOM
 
 my $a = `$Perl $Inc $filename 2>&1` ;
- 
+
 print "1..2\n" ;
 ok(1, ($? >> 8) == 0) ;
 ok(2, $a eq $expected_output) ;
