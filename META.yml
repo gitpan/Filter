@@ -3,25 +3,25 @@ abstract: 'Source Filters'
 author:
   - 'Paul Marquess <pmqs@cpan.org>'
 build_requires:
-  ExtUtils::MakeMaker: 0
+  ExtUtils::MakeMaker: '0'
 configure_requires:
-  ExtUtils::MakeMaker: 0
+  ExtUtils::MakeMaker: '0'
 dynamic_config: 1
-generated_by: 'ExtUtils::MakeMaker version 6.64, CPAN::Meta::Converter version 2.120630'
+generated_by: 'ExtUtils::MakeMaker version 6.98, CPAN::Meta::Converter version 2.141170'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
-  version: 1.4
+  version: '1.4'
 name: Filter
 no_index:
   directory:
     - t
     - inc
 recommends:
-  Filter::Simple: 0.88
-  Filter::Simple::Compile: 0.02
+  Filter::Simple: '0.88'
+  Filter::Simple::Compile: '0.02'
 requires: {}
 resources:
   license: http://dev.perl.org/licenses/
   repository: https://github.com/rurban/Filter
-version: 1.49
+version: '1.50'
