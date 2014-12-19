@@ -14,24 +14,23 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 84ea8e5c1a3c7efccf478c1f04789b0347e4c590 Call/Call.pm
-SHA1 9d9eb948201729404a46a0a5ccb4e725fa0527ef Call/Call.xs
+SHA1 dc796974e72e839a357c735af25b7a4abd5be0f7 Call/Call.pm
+SHA1 c7675345a364db87c45855ffbd0d3351f638e1a0 Call/Call.xs
 SHA1 3d1e6a5e07761b79dae2a67df5e7484ab8517e02 Call/Makefile.PL
 SHA1 ab106878b5b6770b97a1a6bfc6ae327930aca030 Call/ppport.h
 SHA1 bb5316cb0f0ae4449f3973242908bf656b446aea Call/typemap
-SHA1 10fba9d8c5b8312057d9bd33c86e179fb2d899da Changes
-SHA1 19c5f8c48f5aaa9f96d700e7f7d305e1d1dbb447 Exec/Exec.pm
-SHA1 f2c0a0ed7fbb78fdc9d1c74704f9224c7ca0890b Exec/Exec.xs
+SHA1 e6b6e76561adff3d0256f3097124a945b2a2fd42 Changes
+SHA1 c024a88b3dad50be7a598ef384874d38160d441c Exec/Exec.pm
+SHA1 58b55c30b7c4d4cd81c3bf67a3c0e1ebc7502680 Exec/Exec.xs
 SHA1 f5c86e77cfcb10451775fc0d2c1448ba1b7ee7f7 Exec/Makefile.PL
-SHA1 4360844f178edeb60b2379cc8f9000a71c603df0 MANIFEST
-SHA1 8cfa1fdc396dc2c0208ac0905babb45ba07ab3e0 META.json
-SHA1 072e9310f54f5e2825b92d6268946a39049045d3 META.yml
+SHA1 dbbf2b2b9d934eb383a1984e4b115000a4fed65d MANIFEST
+SHA1 e9b39582b677faf511ca97a34d573d3a2edd0d17 META.yml
 SHA1 7003a94da2386c8966f9bcd773270414bcd91f4f Makefile.PL
-SHA1 bb18c13cf56c83fdc8658b7e1274d8c10e73bac8 README
+SHA1 37568c2885a5a11fbbbc56bb472cecbc0b5f1d8d README
 SHA1 d298989d6a6dde3eae4563d91c7c7cd3c511e050 decrypt/Makefile.PL
 SHA1 ed95e519c49033476f6b1084b7a6fd6347ce7737 decrypt/decr
-SHA1 38d8c07b5d786fd557a8407ae89feb164f4e643a decrypt/decrypt.pm
-SHA1 6c76b8f79a7c52bbf9a4392d5f737cb4625bc9cc decrypt/decrypt.xs
+SHA1 c81195ac248f0a092f8406cd58c956ee30a28bc0 decrypt/decrypt.pm
+SHA1 56abe4fc749caaca96eabae6a8b97ab7ce859f4e decrypt/decrypt.xs
 SHA1 0f22731e97b9b3803ffe785d9e2c5665cfd654c6 decrypt/encrypt
 SHA1 0bf507061d318b097119837bbda8411f06c2bfb5 examples/closure/Count.pm
 SHA1 b8965a11e0a20642dfe99421961a112edf2a8706 examples/closure/Decompress.pm
@@ -54,7 +53,7 @@ SHA1 2a98ca8e4df7d3bff94637dc870e47c95c030913 lib/Filter/exec.pm
 SHA1 a8731459699c802f358b30a9dc96eef70f904e86 lib/Filter/sh.pm
 SHA1 cef9663cf8f6d83ee79b390d14d7a6e4683fb457 mytest
 SHA1 22f5a6597f64204d7ccbd25442744f7102132d87 perlfilter.pod
-SHA1 af34efde040dd58d8d5c569c91907e25749486db t/call.t
+SHA1 47be164f1466fadfb44017d5e038926c77d879c8 t/call.t
 SHA1 3644d155108e9e14f7230476454f8a3853cceab6 t/cpp.t
 SHA1 abec7e47e7afe5edfebaaa4edcdfb7c3cadc2f04 t/decrypt.t
 SHA1 9d37016c431260e9d19fe7f0e3a47f804f1368c6 t/exec.t
@@ -68,12 +67,12 @@ SHA1 ade48e2b6098a0a329312543e1451e7e7fb7bc5f t/z_perl_minimum_version.t
 SHA1 1dbe44e2091ab84d8462fda2052e35bf1354d963 t/z_pod-coverage.t
 SHA1 c8aa3903d3aba84c19bbd94d677620c758fa07d5 t/z_pod.t
 SHA1 8568bca5a96669cb8d8a37eec0453ead6f331b3e tee/Makefile.PL
-SHA1 c14aafdd34903bf6e328706232f7e5dd6a7b6e76 tee/tee.pm
+SHA1 843cc2ec523944e1cbe03ccef2ad35dd7002bff0 tee/tee.pm
 SHA1 86da5dd869daf1b40405e827eae0241a07e0ce56 tee/tee.xs
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1
 
-iEYEARECAAYFAlSGv88ACgkQmm2SYo/9yUJtdACfQd1f8G0CTKtDmJgIBPdRl2Eg
-1twAnjKxQu/eRDNtfOS1d4BKZiH9ktaf
-=MO0P
+iEYEARECAAYFAlSUklsACgkQmm2SYo/9yUIPwwCghCtQlXv2HDCJ+s4afppTzVNU
+4AMAn1FHMuZzjqPtDhzkCThg0UrShRpI
+=pQ0V
 -----END PGP SIGNATURE-----

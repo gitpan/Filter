@@ -4,7 +4,7 @@
       "Paul Marquess <pmqs@cpan.org>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "ExtUtils::MakeMaker version 6.98, CPAN::Meta::Converter version 2.142060",
+   "generated_by" : "ExtUtils::MakeMaker version 7.04, CPAN::Meta::Converter version 2.142060",
    "license" : [
       "perl_5"
    ],
@@ -47,5 +47,5 @@
          "url" : "https://github.com/rurban/Filter"
       }
    },
-   "version" : "1.51"
+   "version" : "1.52"
 }
