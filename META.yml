@@ -24,4 +24,4 @@ requires: {}
 resources:
   license: http://dev.perl.org/licenses/
   repository: https://github.com/rurban/Filter
-version: '1.52'
+version: '1.53'
